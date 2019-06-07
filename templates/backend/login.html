@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    <meta charset="UTF-8">
+    <title>汉唐剧院管理系统</title>
+    <style>
+        body{
+            background-image: url("{% static 'images/login.jpg' %}");
+            background-size: 100%;
+        }
+    </style>
+    <link rel="icon" href="{% static 'images/title.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/signin.css' %}">
+</head>
+<body>
+<div class="container">
+  <form class="form-signin" method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <h2 class="form-signin-heading text-center">欢迎登录汉唐影院</h2>
+    <label for="inputUser" class="sr-only">账号</label>
+    <input type="text" id="inputUser" name="username" class="form-control" placeholder="账号" required autofocus>
+    <label for="inputPassword" class="sr-only">密码</label>
+    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="密码" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+  </form>
+
+</div> <!-- /container -->
+</body>
+</html>

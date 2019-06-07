@@ -1,0 +1,29 @@
+{% extends 'backend/cinema/index.html' %}
+    {% block search_cinema_name %}
+    <div style="padding-top: 10px;">
+        <table id="table" class="table table-bordered table-hover"
+               style="text-align: center;">
+            <tr>
+                <th>影厅编号</th>
+                <th>影厅名称</th>
+                <th>座位行数</th>
+                <th>座位列数</th>
+                <th>影厅描述</th>
+                <th>操作</th>
+            </tr>
+            {% for row in cinema %}
+                <tr>
+                    <th>{{ row.id }}</th>
+                    <td>{{ row.cinema_name }}</td>
+                    <td>{{ row.cinema_row }}</td>
+                    <td>{{ row.cinema_column }}</td>
+                    <td>{{ row.cinema_detail }}</td>
+                    <td>
+                         <a class="glyphicon glyphicon-remove icon del-row" href="{% url 'del_cinema' %}?nid={{ row.id }}"></a>
+                         <a class="fa fa-pencil-square-o fa-2x icon edit-row" href="{% url 'edit_cinema' %}?nid={{ row.id }}"></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

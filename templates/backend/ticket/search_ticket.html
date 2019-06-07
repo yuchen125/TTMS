@@ -1,0 +1,33 @@
+{% extends 'backend/ticket/index_ticket.html' %}
+{% block search_ticket %}
+        <div style="padding-top: 10px;">
+            <table id="table" class="table table-bordered table-hover">
+                <tr>
+                    <th>已售出票ID</th>
+                    <th>计划ID</th>
+                    <th>演出厅</th>
+                    <th>演出影片</th>
+                    <th>演出开始时间</th>
+                    <th>座位行</th>
+                    <th>座位列</th>
+                    <th>票价</th>
+                    <th>操作</th>
+                </tr>
+                {% for row in ticket %}
+                    <tr>
+                        <th>{{ row.id }}</th>
+                        <td>{{ row.ticket_plan.id }}</td>
+                        <td>{{ row.ticket_plan.plan_cinema.cinema_name }}</td>
+                        <td>{{ row.ticket_plan.plan_movie.movie_name }}</td>
+                        <td>{{ row.ticket_plan.plan_start_time| date:'Y-m-d H:i:s' }}</td>
+                        <td>{{ row.ticket_row }}</td>
+                        <td>{{ row.ticket_column }}</td>
+                        <td>{{ row.ticket_plan.plan_movie.movie_price}}</td>
+                        <td>
+                            <a class="btn btn-danger" href="{% url 'del_ticket' %}?nid={{ row.id }}">退票</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+{% endblock %}

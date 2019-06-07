@@ -1,0 +1,52 @@
+{% extends 'backend/cinema/base.html' %}
+{% block table %}
+    <!-- 查询块 -->
+    <div class="col-md-8">
+        <form class="form-inline" method="post" action="{% url 'search_cinema' %}">
+            {% csrf_token %}
+            <!-- <input type="hidden" name="method" value="search"/> -->
+            影厅名称:
+            <label><input type="text" class="form-control" name="search_cinema_name" />&nbsp;&nbsp;</label>
+{#            <a href="" class="btn btn-danger">增加</a>#}
+
+            <input type="submit" class="btn btn-primary" value="查询">
+            <a href="{% url 'index' %}" class="btn btn-default">返回</a>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <form action="{% url 'add_cinema' %}">
+            <input type="submit" class="btn btn-danger" value="增加影厅">
+        </form>
+    </div>
+    {% block search_cinema_name %}
+    <div style="padding-top: 10px;">
+        <table id="table" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>影厅编号</th>
+                    <th>影厅名称</th>
+                    <th>座位行数</th>
+                    <th>座位列数</th>
+                    <th>影厅描述</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for row in cinema_list %}
+                <tr>
+                    <th>{{ row.id }}</th>
+                    <td>{{ row.cinema_name }}</td>
+                    <td>{{ row.cinema_row }}</td>
+                    <td>{{ row.cinema_column }}</td>
+                    <td>{{ row.cinema_detail }}</td>
+                    <td>
+                         <a class="glyphicon glyphicon-remove icon del-row" href="{% url 'del_cinema' %}?nid={{ row.id }}"></a>
+                         <a class="fa fa-pencil-square-o fa-2x icon edit-row" href="{% url 'edit_cinema' %}?nid={{ row.id }}"></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}
+{% endblock %}

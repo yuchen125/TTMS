@@ -1,0 +1,52 @@
+{% extends 'backend/plan/index_plan.html' %}
+{% block plan_table %}
+    <div class="col-md-3"></div>
+    <div><h2 class="col-md-4">增加演出计划</h2></div>
+	<div class="col-md-10" style="padding-top: 10px">
+        <form class="form-horizontal" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label">影片名称</label>
+                <label class="col-sm-6">
+                    {{ obj.plan_movie }}
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">演出厅</label>
+                <label class="col-sm-6" >
+                   {{ obj.plan_cinema }}
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">开始时间</label>
+                <label class="col-sm-6">
+                   {{ obj.plan_start_time }}{{ obj.plan_start_time.errors.0 }}
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">结束时间</label>
+                <label class="col-sm-6">
+                   {{ obj.plan_end_time }}{{ obj.plan_end_time.errors.0 }}
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2"></label>
+            {%  if obj.non_field_errors %}
+                {% for item in obj.non_field_errors %}
+                    <label style="color: red" class="col-md-2">{{ item }}</label>
+                {% endfor %}
+            {% endif %}
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label" style="color: red; font-weight: bold;"></div>
+                <div class="col-sm-6">
+                    <!-- <input type="hidden" name="method" value="add"> -->
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><input type="submit" class="btn btn-primary" value="提交"></label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="btn btn-warning" href="{% url 'index_plan' %}">返 回</a>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

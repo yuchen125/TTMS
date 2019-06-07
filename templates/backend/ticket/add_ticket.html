@@ -1,0 +1,46 @@
+{% extends 'backend/ticket/index_ticket.html' %}
+{% block ticket_table %}
+    <div class="col-md-3"></div>
+    <div><h2 class="col-md-4">售票</h2></div>
+	<div class="col-md-10" style="padding-top: 10px">
+        <form class="form-horizontal" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label">演出计划</label>
+                <label class="col-sm-6">
+                    {{ obj.ticket_plan }}
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">座位行</label>
+                <label class="col-sm-6" >
+                   {{ obj.ticket_row }}{{ obj.ticket_row.errors.0 }}
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">座位列</label>
+                <label class="col-sm-6">
+                   {{ obj.ticket_column }}{{ obj.ticket_column.errors.0 }}
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2"></label>
+            {%  if obj.non_field_errors %}
+                {% for item in obj.non_field_errors %}
+                    <label style="color: red" class="col-md-2">{{ item }}</label>
+                {% endfor %}
+            {% endif %}
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label" style="color: red; font-weight: bold;"></div>
+                <div class="col-sm-6">
+                    <!-- <input type="hidden" name="method" value="add"> -->
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><input type="submit" class="btn btn-primary" value="提交"></label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="btn btn-warning" href="{% url 'index_ticket' %}">返 回</a>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

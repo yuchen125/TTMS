@@ -1,0 +1,28 @@
+{% extends 'backend/seat/index_seat.html' %}
+{% block search_seat %}
+    <div style="padding-top: 10px;">
+        <table id="table" class="table table-bordered table-hover">
+            <tr>
+                <th>影厅编号</th>
+                <th>影厅名称</th>
+                <th>座位行</th>
+                <th>座位列</th>
+                <th>操作</th>
+            </tr>
+            {% for row in data %}
+                <tr>
+                    <th>{{ row.seat_cinema_id }}</th>
+                    <td>{{ row.seat_cinema }}</td>
+                    <td>{{ row.seat_row }}</td>
+                    <td>{{ row.seat_column }}</td>
+                    <td>
+                         <a class="glyphicon glyphicon-remove icon del-row" href="{% url 'del_seat' %}?nid={{ row.id }}"></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+         <ul class="pagination pagination">
+            {{ page_obj.page_str|safe }}
+         </ul>
+    </div>
+{% endblock %}

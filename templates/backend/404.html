@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load staticfiles %}
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    <title>汉唐剧院管理系统</title>
+    <link rel="icon" href="{% static 'images/title.ico' %}" type="image/x-icon">
+</head>
+<body >
+<div class="middle-box text-center animated fadeInDown">
+    <h1>404</h1>
+    <h3> 抱歉，你的权限不够！</h3>
+    <div><a class=" btn btn-primary" href="{% url 'index' %}">返回主页</a></div>
+</div>
+</body>
+</html>

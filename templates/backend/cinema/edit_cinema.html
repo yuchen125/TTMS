@@ -1,0 +1,51 @@
+{% extends 'backend/cinema/base.html' %}
+{% block table %}
+    <div class="col-md-3"></div>
+    <div><h2 class="col-md-4">影厅编辑</h2></div>
+	<div class="col-md-10" style="padding-top: 10px">
+        <form class="form-horizontal" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label">影厅编号</label>
+                <label class="col-sm-6">
+                    <input type="text" class="form-control" disabled name="cinema_id" value="{{ cinema_list.id }}">
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">影厅名称</label>
+                <label class="col-sm-6">
+                    <input type="text" class="form-control" name="cinema_name"
+                         value="{{ cinema_list.cinema_name }}">
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">座位行数</label>
+                <label class="col-sm-6">
+                    <input type="text" class="form-control" value="{{ cinema_list.cinema_row }}"  name="cinema_row">
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">座位列数</label>
+                <label class="col-sm-6">
+                    <input type="text" class="form-control" value="{{ cinema_list.cinema_column }}" name="cinema_column">
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">影厅描述</label>
+                <label class="col-sm-6">
+                    <input type="text" class="form-control" value="{{ cinema_list.cinema_detail }}" name="cinema_detail">
+                </label>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label" style="color: red; font-weight: bold;">{{ message }}</div>
+                <div class="col-sm-6">
+                    <!-- <input type="hidden" name="method" value="add"> -->
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><input type="submit" class="btn btn-primary" value="提交"></label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="btn btn-warning" href="{% url 'index' %}">返 回</a>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

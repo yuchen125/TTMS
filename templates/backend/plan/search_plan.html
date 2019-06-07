@@ -1,0 +1,27 @@
+{% extends 'backend/plan/index_plan.html' %}
+{% block search_plan %}
+    <div style="padding-top: 10px;">
+        <table id="table" class="table table-bordered table-hover">
+            <tr>
+                <th>演出计划ID</th>
+                <th>影片名称</th>
+                <th>演出厅</th>
+                <th>开始时间</th>
+                <th>结束时间</th>
+                <th>操作</th>
+            </tr>
+            {% for row in plan %}
+                <tr>
+                    <th>{{ row.id }}</th>
+                    <td>{{ row.plan_movie.movie_name }}</td>
+                    <td>{{ row.plan_cinema.cinema_name }}</td>
+                    <td>{{ row.plan_start_time | date:'Y-m-d H:i:s'}}</td>
+                    <td>{{ row.plan_start_time | date:'Y-m-d H:i:s'}}</td>
+                    <td>
+                        <a class="glyphicon glyphicon-remove icon del-row" href="{% url 'del_plan' %}?nid={{ row.id }}"></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+ {% endblock %}

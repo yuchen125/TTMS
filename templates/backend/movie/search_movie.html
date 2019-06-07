@@ -1,0 +1,24 @@
+{% extends 'backend/movie/index_movie.html' %}
+{% block search_movie %}
+    <div style="padding-top: 10px;">
+        <table id="table" class="table table-bordered table-hover">
+            <tr>
+                <th>电影名称</th>
+                <th>电影描述</th>
+                <th>电影价格</th>
+                <th>操作</th>
+            </tr>
+            {% for row in movie %}
+                <tr>
+                    <th>{{ row.movie_name }}</th>
+                    <td>{{ row.movie_detail }}</td>
+                    <td>{{ row.movie_price }}</td>
+                    <td>
+                        <a class="glyphicon glyphicon-remove icon del-row" href="{% url 'del_movie' %}?nid={{ row.id }}"></a>
+                        <a class="fa fa-pencil-square-o fa-2x icon edit-row" href="{% url 'edit_movie' %}?nid={{ row.id }}"></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+ {% endblock %}

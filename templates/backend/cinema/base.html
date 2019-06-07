@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>汉唐剧院管理系统</title>
+    {% load staticfiles %}
+    {% load fontawesome %}
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% fontawesome_stylesheet %}
+    <link rel="icon" href="{% static 'images/title.ico' %}" type="image/x-icon">
+</head>
+<body>
+<div style="height: 50px; line-height: 50px; font-size: 25px; vertical-align: middle; text-align: center"
+     class="bg-primary">汉唐剧院管理系统
+</div>
+<div class="col-md-10"></div>
+<div>
+    <label class="fa fa-user fa-2x" aria-hidden="true"></label>
+    <label>{{ request.user.username }}|</label>
+    <a href="{% url 'logout' %}" style="color: red">注销</a>
+</div>
+    <!-- 左导航栏 -->
+    <div class="col-md-2" style="padding: 10px 10px">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">导航</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover">
+                    <tr>
+                        <td><p style="width:24px"></p>&nbsp;&nbsp;<a href="{% url 'index' %}"  style="color:red">影厅管理</a></td>
+                    </tr>
+                    <tr>
+                        <td><p style="width:24px"></p>&nbsp;&nbsp;<a href="{% url 'index_seat' %}">座位管理</a></td>
+                    </tr>
+                    <tr>
+                        <td><p style="width:24px"></p>&nbsp;&nbsp;<a href="{% url 'index_movie' %}">影片管理</a></td>
+                    </tr>
+                    <tr>
+                        <td><p style="width:24px"></p>&nbsp;&nbsp;<a href="{% url 'index_plan' %}">计划管理</a></td>
+                    </tr>
+                    <tr>
+                        <td><p style="width:24px"></p>&nbsp;&nbsp;<a href="{% url 'index_ticket' %}">票务管理</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10" style="padding-top: 10px">
+        {% block table %}
+        {% endblock %}
+    </div>
+</body>
+</html>
