@@ -3,6 +3,7 @@ from repository import models
 from repository.forms.forms import CinemaForm
 from django.contrib.auth.decorators import login_required
 
+
 # Create your views here.
 @login_required
 def index(request):
@@ -14,6 +15,7 @@ def index(request):
     cinema_list = models.Cinema.objects.filter()
     return render(request, 'backend/cinema/index.html', {'cinema_list': cinema_list})
 
+
 @login_required
 def del_cinema(request):
     '''
@@ -24,6 +26,7 @@ def del_cinema(request):
     nid = request.GET.get('nid')
     models.Cinema.objects.filter(id=nid).delete()
     return redirect('index')
+
 
 @login_required
 def edit_cinema(request):
@@ -43,9 +46,10 @@ def edit_cinema(request):
         cinema_column = int(request.POST.get('cinema_column'))
         detail = request.POST.get('cinema_detail')
         cinema_list = models.Cinema.objects.filter(id=nid).first()
-        if len(name) >= 10 or len(detail) >= 50 or cinema_row > 10 or cinema_column > 10:
+        if len(name) >= 10 or len(detail) >= 50 or cinema_row > 10 or cinema_column > 10 or models.Cinema.objects.filter(
+                cinema_name=name).count():
             return render(request, 'backend/cinema/edit_cinema.html',
-                          {'cinema_list': cinema_list, 'message': '编辑输入格式不正确,请重新输入'})
+                          {'cinema_list': cinema_list, 'message': '编辑输入格式不正确或影厅名已存在，请重新输入'})
         models.Cinema.objects.filter(id=nid).update(cinema_name=name, cinema_row=cinema_row,
                                                     cinema_column=cinema_column, cinema_detail=detail)
         models.Seat.objects.filter(seat_cinema_id=nid).delete()
@@ -55,6 +59,7 @@ def edit_cinema(request):
                 seat_list.append(models.Seat(seat_cinema_id=nid, seat_row=j, seat_column=k))
         models.Seat.objects.bulk_create(seat_list)
         return redirect('index')
+
 
 @login_required
 def search_cinema(request):
@@ -73,6 +78,7 @@ def search_cinema(request):
             return render(request, 'backend/cinema/search_cinema.html', {'cinema': cinema})
         else:
             return render(request, 'backend/cinema/search_cinema.html')
+
 
 @login_required
 def add_cinema(request):
