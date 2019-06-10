@@ -48,7 +48,7 @@ def edit_cinema(request):
         cinema_list = models.Cinema.objects.filter(id=nid).first()
         if len(name) >= 10 or len(detail) >= 50 or cinema_row > 10 or cinema_column > 10:
             return render(request, 'backend/cinema/edit_cinema.html',
-                          {'cinema_list': cinema_list, 'message': '编辑输入格式不正确或影厅名已存在，请重新输入'})
+                          {'cinema_list': cinema_list, 'message': '编辑输入格式不正确，请重新输入'})
         models.Cinema.objects.filter(id=nid).update(cinema_name=name, cinema_row=cinema_row,
                                                     cinema_column=cinema_column, cinema_detail=detail)
         models.Seat.objects.filter(seat_cinema_id=nid).delete()
