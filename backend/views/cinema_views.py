@@ -46,8 +46,7 @@ def edit_cinema(request):
         cinema_column = int(request.POST.get('cinema_column'))
         detail = request.POST.get('cinema_detail')
         cinema_list = models.Cinema.objects.filter(id=nid).first()
-        if len(name) >= 10 or len(detail) >= 50 or cinema_row > 10 or cinema_column > 10 or models.Cinema.objects.filter(
-                cinema_name=name).count():
+        if len(name) >= 10 or len(detail) >= 50 or cinema_row > 10 or cinema_column > 10:
             return render(request, 'backend/cinema/edit_cinema.html',
                           {'cinema_list': cinema_list, 'message': '编辑输入格式不正确或影厅名已存在，请重新输入'})
         models.Cinema.objects.filter(id=nid).update(cinema_name=name, cinema_row=cinema_row,
