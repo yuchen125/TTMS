@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^web/', include('web.urls')),
     url(r'^backend/', include('backend.urls')),
     url(r'^$', v0.do_login),
-    url(r'^static/(?P<path>.*)$', static.serve,
-        {'document_root': settings.STATIC_ROOT}, name='static'),
+    # url(r'^static/(?P<path>.*)$', static.serve,
+    #     {'document_root': settings.STATIC_ROOT}, name='static'),
 ]
 
