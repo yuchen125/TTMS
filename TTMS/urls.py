@@ -17,11 +17,16 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 from backend.views import login_views as v0
+from django.views import static
+from django.conf import settings
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^web/', include('web.urls')),
     url(r'^backend/', include('backend.urls')),
     url(r'^$', v0.do_login),
+    url(r'^static/(?P<path>.*)$', static.serve,
+        {'document_root': settings.STATIC_ROOT}, name='static'),
 ]
 
