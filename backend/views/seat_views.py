@@ -21,6 +21,7 @@ def index_seat(request):
     else:
         return render(request, 'backend/404.html')
 
+
 @login_required
 def del_seat(request):
     '''
@@ -40,16 +41,11 @@ def search_seat(request):
     :param request:
     :return:
     '''
-    if request.method == 'GET':
-        return render(request, 'backend/seat/index_seat.html')
-    elif request.method == 'POST':
-        name = request.POST.get('search_seat_name')
-        if models.Cinema.objects.filter(cinema_name=name).count():
-            obj = models.Seat.objects.filter(seat_cinema__cinema_name=name).order_by('seat_cinema_id', 'seat_cinema',
-                                                                                     'seat_row', 'seat_column')
-            current_page = request.GET.get('p')
-            page_obj = Pagination(obj.count(), current_page)
-            data_list = obj[page_obj.start():page_obj.end()]
-            return render(request, 'backend/seat/index_seat.html', {'data': data_list, 'page_obj': page_obj})
-        else:
-            return render(request, 'backend/seat/index_seat.html')
+    name = request.POST.get('search_seat_name')
+    if models.Cinema.objects.filter(cinema_name=name).count():
+        obj = models.Seat.objects.filter(seat_cinema__cinema_name=name).order_by('seat_cinema_id', 'seat_cinema',
+                                                                                 'seat_row', 'seat_column')
+        return render(request, 'backend/seat/search_seat.html', {'data': obj, 'search_seat_name': name})
+
+    else:
+        return render(request, 'backend/seat/search_seat.html', {'search_seat_name': name})
